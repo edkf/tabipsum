@@ -3,15 +3,10 @@ import loremIpsum from 'lorem-ipsum'
 import styled from 'styled-components'
 import './components/styled-components/global.js'
 import InputRange from 'react-input-range'
+import { connect } from 'react-redux'
 
 import TopBar from './components/topBar'
 import Button from './components/button'
-
-let unitsObj = [
-  {name: 'words', isSelected: true},
-  {name: 'sentences', isSelected: false},
-  {name: 'paragraphs', isSelected: false},
-]
 
 const Container = styled.div`
   display: flex;
@@ -71,7 +66,6 @@ class App extends Component {
 
   constructor (props) {
     super(props)
-
     this.contentChange = this.contentChange.bind(this)
 
     this.state = {
@@ -93,27 +87,11 @@ class App extends Component {
     this.setState({
       contentType: unit.name
     })
-
-    unitsObj.forEach(item => {
-      if (item.name === unit.name) {
-        item.isSelected = true
-      } else {
-        item.isSelected = false
-      }
-    })
   }
 
   render() {
 
-    const content = loremIpsum({
-      count: this.state.value,
-      units: this.state.contentType, 
-      sentenceLowerBound: 5,
-      sentenceUpperBound: 15,
-      paragraphLowerBound: 3,
-      paragraphUpperBound: 7,
-      format: 'plain',
-    })
+    const { content, value, units } = this.props.state
 
     return (
       <Container>
@@ -124,17 +102,17 @@ class App extends Component {
             min='1'
             max='100'
             onChange={this.contentChange}
-            value={this.state.value}
+            value={value}
           />
           <List>
-            {unitsObj.map((unit, index) => (
+            {units.map((unit, index) => (
               <Item key={unit.name}  onClick={(event) => this.changeUnit(unit, event)} isSelected={unit.isSelected} >{unit.name}</Item>
             ))}
           </List>
           <InputRange
             minValue={1}
             maxValue={100}
-            value={this.state.value}
+            value={value}
             onChange={value => this.setState({ value })}
           />
         </MainContainer>
@@ -144,4 +122,13 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    state
+  }
+}
+
+
+export default connect(
+  mapStateToProps
+)(App)
