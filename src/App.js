@@ -71,14 +71,29 @@ const units = [ 'words', 'sentences', 'paragraphs']
 
 class App extends Component {
 
+  constructor (props) {
+    super(props)
+    this.switchTheme = this.switchTheme.bind(this)
+  }
+
+  componentDidMount () {
+    console.log(localStorage.getItem("darkmode"))
+  }
+  
+  switchTheme () {
+    localStorage.setItem('darkmode', !localStorage.getItem("darkmode"))
+  }
+
   render() {
 
-    const { content, value, contentType } = this.props.state
-    const { changeUnit, updateValue, updateFromNumber } = this.props
+    const { content, value, contentType } = this.props.state // Redux
+    const { changeUnit, updateValue, updateFromNumber } = this.props // Props
 
     return (
       <Container>
-        <TopBar />
+        <TopBar
+          switchTheme={this.switchTheme}
+        />
         <MainContainer>
           <Number
             type='number'
