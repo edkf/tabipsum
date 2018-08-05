@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import loremIpsum from 'lorem-ipsum'
 import styled from 'styled-components'
 import './components/styled-components/global.js'
 import InputRange from 'react-input-range'
@@ -64,34 +63,10 @@ const List = styled.ul`
 
 class App extends Component {
 
-  constructor (props) {
-    super(props)
-    this.contentChange = this.contentChange.bind(this)
-
-    this.state = {
-      value: 11,
-      contentType: 'words'
-    }
-  }
-
-  contentChange (event) {
-    if (event.target.value <= 100) {
-      this.setState({
-        value: event.target.value
-      })
-    }
-  }
-
-  changeUnit(unit, event) {
-
-    this.setState({
-      contentType: unit.name
-    })
-  }
-
   render() {
 
     const { content, value, units } = this.props.state
+    const { changeUnit } = this.props
 
     return (
       <Container>
@@ -101,12 +76,11 @@ class App extends Component {
             type='number'
             min='1'
             max='100'
-            onChange={this.contentChange}
             value={value}
           />
           <List>
             {units.map((unit, index) => (
-              <Item key={unit.name}  onClick={(event) => this.changeUnit(unit, event)} isSelected={unit.isSelected} >{unit.name}</Item>
+              <Item key={unit.name} isSelected={unit.isSelected} onClick={changeUnit}>{unit.name}</Item>
             ))}
           </List>
           <InputRange
@@ -122,6 +96,18 @@ class App extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    changeUnit: (event) => {
+      console.log(event.target.innerHTML)
+      dispatch({
+        type: 'CHANGE_UNIT',
+        contentType: event.target.innerHTML
+      })
+    },
+  }
+}
+
 const mapStateToProps = state => {
   return {
     state
@@ -130,5 +116,6 @@ const mapStateToProps = state => {
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App)

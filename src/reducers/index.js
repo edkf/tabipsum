@@ -25,9 +25,11 @@ const initialState = {
 
 export default function counter(state = initialState, action) {
   switch (action.type) {
-    case 'INCREMENT':
-     return {
-       ...state,
+    case 'CHANGE_UNIT':
+      const { contentType } = action
+      return {
+        ...state,
+        contentType
       }
     default:
     return state
