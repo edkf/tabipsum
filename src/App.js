@@ -1,12 +1,17 @@
+// Dependencies
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import './components/styled-components/global.js'
 import InputRange from 'react-input-range'
 import { connect } from 'react-redux'
 
+// Actions
+import { changeUnit, updateValue } from './actions'
+
+// Components
 import TopBar from './components/topBar'
 import Button from './components/button'
 
+// Styled Components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -62,12 +67,14 @@ const List = styled.ul`
   }
 `
 
+const units = [ 'words', 'sentences', 'paragraphs']
+
 class App extends Component {
 
   render() {
 
-    const { content, value, units } = this.props.state
-    const { changeUnit, updateValue, updateFromValue } = this.props
+    const { content, value, contentType } = this.props.state
+    const { changeUnit, updateValue, updateFromNumber } = this.props
 
     return (
       <Container>
@@ -78,11 +85,11 @@ class App extends Component {
             min='1'
             max='100'
             value={value}
-            onChange={updateFromValue}
+            onChange={updateFromNumber}
           />
           <List>
             {units.map((unit, index) => (
-              <Item key={unit.name} isSelected={unit.isSelected} onClick={changeUnit}>{unit.name}</Item>
+              <Item key={unit} isSelected={unit === contentType ? true : false } onClick={changeUnit}>{unit}</Item>
             ))}
           </List>
           <InputRange
@@ -100,24 +107,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeUnit: (event) => {
-      dispatch({
-        type: 'CHANGE_UNIT',
-        contentType: event.target.innerHTML
-      })
-    },
-    updateValue: (value) => {
-      dispatch({
-        type: 'UPDATE_VALUE',
-        value
-      })
-    },
-    updateFromValue: (event) => {
-      dispatch({
-        type: 'UPDATE_VALUE',
-        value: event.target.value
-      })
-    }
+    changeUnit: (event) => { dispatch(changeUnit(event.target.innerHTML))},
+    updateValue: (value) => { dispatch(updateValue(value)) },
+    updateFromNumber: (event) => { dispatch(updateValue(event.target.value === '' ? false : event.target.value)) }
   }
 }
 
@@ -126,7 +118,6 @@ const mapStateToProps = state => {
     state
   }
 }
-
 
 export default connect(
   mapStateToProps,

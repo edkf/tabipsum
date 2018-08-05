@@ -1,14 +1,22 @@
+// Dependencies
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
 import { createStore } from 'redux'
 
+// Components
+import App from './App'
+
+// Reducers
+import reducers from './reducers'
+
+// Styled-components
+import './components/styled-components/global.js'
+
+// Create Redux Store
 const store = createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // Enable Redux Devtools
 )
 
 ReactDOM.render(
@@ -16,4 +24,3 @@ ReactDOM.render(
     <App />
   </Provider>
 , document.getElementById('root'));
-registerServiceWorker();

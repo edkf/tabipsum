@@ -1,7 +1,9 @@
+// Dependencies
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Clipboard from 'react-clipboard.js'
 
+// Styled Components
 const ClipboardButton = styled(Clipboard)`
   font-family: 'Roboto Mono';
   color: #FFF;
@@ -22,6 +24,7 @@ class Button extends Component {
     super(props)
     this.onSuccess = this.onSuccess.bind(this)
     this.getRandomEmoji = this.getRandomEmoji.bind(this)
+
     this.state = {
       buttonLabel: 'Copy',
       buttonColor: '#000000'
@@ -47,13 +50,17 @@ class Button extends Component {
   }
 
   render () {
+
+    const { buttonColor, buttonLabel } = this.state
+    const { content } = this.props
+
     return (
       <ClipboardButton
-        buttonColor={this.state.buttonColor}
-        data-clipboard-text={this.props.content}
+        buttonColor={buttonColor}
+        data-clipboard-text={content}
         onSuccess={this.onSuccess}
       >
-        {this.state.buttonLabel}
+        {buttonLabel}
       </ClipboardButton>
     )
   }

@@ -1,5 +1,8 @@
+// Dependencies
 import React, { Component } from 'react'
 import styled from 'styled-components'
+
+// Assets
 import Dots from './svg/dots.js'
 
 const Container = styled.div`
@@ -19,7 +22,7 @@ const List = styled.ul`
   right: 0;
   opacity: 0;
   `
-  
+
   const Dropdown = styled.div`
   position: relative;
   &:hover {
@@ -39,6 +42,12 @@ const Item = styled.li`
   font-size: 10px;
   list-style: none;
   margin-bottom: 7px;
+  color: #AAA;
+  transition: .3s ease;
+
+  &:hover {
+    color: #000;
+  }
 
   a {
     transition: .3s ease;
@@ -51,6 +60,17 @@ const Item = styled.li`
   }
 `
 
+const items = [
+  {
+    text: 'Created by @edkf',
+    url: 'https://edkf.com.br'
+  },
+  {
+    text: 'Visit Website',
+    url: 'http://tabipsum.com'
+  },
+]
+
 class TopBar extends Component {
   render () {
     return (
@@ -58,15 +78,13 @@ class TopBar extends Component {
         <Dropdown >
           <Dots />
           <List>
-            <Item>
-              <a href="https://edkf.com.br" target="_blank" rel="noopener noreferrer">Created by @edkf</a>
-            </Item>
-            <Item>
-              <a href="http://twitter.com/share?text=I Just Downloaded TabIpsum, a Fake content generator&url=http://tabipsum.com&hashtags=tabipsum" target="_blank" rel="noopener noreferrer">Share on Twitter</a>
-            </Item>
-            <Item>
-              <a href="http://tabipsum.com" target="_blank" rel="noopener noreferrer">Visit Website</a>
-            </Item>
+            {
+              items.map((item) => (
+                <Item>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">{item.text}</a>
+                </Item>
+              ))
+            }
           </List>
         </Dropdown>
       </Container>

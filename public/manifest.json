@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "TabIpsum",
   "short_name": "TabIpsum - Lorem Ipsum Generator",
-  "version": "0.0.0.1",
+  "version": "1.0",
   "description": "Just a Lorem Ipsum generator.",
   "author": "Edgard Kozlowski <hello@edkf.com.br> (http://edkf.com.br)",
   "commands": {
