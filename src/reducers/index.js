@@ -29,7 +29,23 @@ export default function counter(state = initialState, action) {
       const { contentType } = action
       return {
         ...state,
-        contentType
+        contentType,
+        content: loremIpsum({
+          ...state.content,
+          units: contentType,
+          count: state.value
+        }),
+      }
+    case 'UPDATE_VALUE':
+      const { value } = action
+      return {
+        ...state,
+        value: Number(value),
+        content: loremIpsum({
+          ...state.content,
+          units: state.contentType,
+          count: Number(value)
+        })
       }
     default:
     return state

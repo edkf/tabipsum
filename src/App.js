@@ -30,6 +30,7 @@ const Number = styled.input`
   letter-spacing: -10px;
   border: none;
   background-color: transparent;
+
   &:focus {
     outline: none;
   }
@@ -66,7 +67,7 @@ class App extends Component {
   render() {
 
     const { content, value, units } = this.props.state
-    const { changeUnit } = this.props
+    const { changeUnit, updateValue, updateFromValue } = this.props
 
     return (
       <Container>
@@ -77,6 +78,7 @@ class App extends Component {
             min='1'
             max='100'
             value={value}
+            onChange={updateFromValue}
           />
           <List>
             {units.map((unit, index) => (
@@ -87,7 +89,7 @@ class App extends Component {
             minValue={1}
             maxValue={100}
             value={value}
-            onChange={value => this.setState({ value })}
+            onChange={updateValue}
           />
         </MainContainer>
         <Button content={content} />
@@ -99,12 +101,23 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     changeUnit: (event) => {
-      console.log(event.target.innerHTML)
       dispatch({
         type: 'CHANGE_UNIT',
         contentType: event.target.innerHTML
       })
     },
+    updateValue: (value) => {
+      dispatch({
+        type: 'UPDATE_VALUE',
+        value
+      })
+    },
+    updateFromValue: (event) => {
+      dispatch({
+        type: 'UPDATE_VALUE',
+        value: event.target.value
+      })
+    }
   }
 }
 
