@@ -64,6 +64,9 @@ class TopBar extends Component {
             <Item>
               <a href="http://twitter.com/share?text=I Just Downloaded TabIpsum, a Fake content generator&url=http://tabipsum.com&hashtags=tabipsum" target="_blank" rel="noopener noreferrer">Share on Twitter</a>
             </Item>
+            <Item>
+              <a href="http://tabipsum.com" target="_blank" rel="noopener noreferrer">Visit Website</a>
+            </Item>
           </List>
         </Dropdown>
       </Container>
