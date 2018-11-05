@@ -18,7 +18,6 @@ const List = styled.ul`
   padding: 0;
   position: absolute;
   pointer-events: none;
-  transition: .3s ease;
   right: 0;
   opacity: 0;
   `
@@ -43,19 +42,17 @@ const Item = styled.li`
   list-style: none;
   margin-bottom: 7px;
   color: #AAA;
-  transition: .3s ease;
 
   &:hover {
-    color: #000;
+    color: ${props => props.darkmode ? '#DADADA' : '#000'};
   }
 
   a {
-    transition: .3s ease;
     color: #AAA;
     text-decoration: none;
 
     &:hover {
-      color: #000;
+      color: ${props => props.darkmode ? '#DADADA' : '#000'};
     }
   }
 `
@@ -75,12 +72,12 @@ class TopBar extends Component {
     return (
       <Container>
         <Dropdown >
-          <Dots />
+          <Dots darkmode={darkmode} />
           <List>
-            <Item onClick={this.props.switchUIMode}> { darkmode ? 'Disable' : 'Enable'} darkmode</Item>
+            <Item onClick={this.props.switchUIMode} darkmode={darkmode}> { darkmode ? 'Disable' : 'Enable'} darkmode</Item>
             {
               items.map((item) => (
-                <Item key={item.text}>
+                <Item key={item.text} darkmode={darkmode}>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">{item.text}</a>
                 </Item>
               ))
