@@ -74,7 +74,7 @@ class TopBar extends Component {
             <Item
               onClick={this.props.switchUIMode}
               darkmode={darkmode}>
-                Enable darkmode
+                Enable dark mode
                 <SwitchButton darkmode={darkmode} />
             </Item>
             {
