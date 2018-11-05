@@ -5,6 +5,8 @@ import styled from 'styled-components'
 // Assets
 import Dots from './svg/dots.js'
 
+import SwitchButton from './SwitchButton'
+
 const Container = styled.div`
   width: 100%;
   padding: 15px 25px;
@@ -15,8 +17,10 @@ const Container = styled.div`
 const List = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 10px;
+  background-color: ${props => props.darkmode ? '#353638' : '#FFFFFF'};
   position: absolute;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
   pointer-events: none;
   right: 0;
   opacity: 0;
@@ -33,27 +37,20 @@ const List = styled.ul`
 `
 
 const Item = styled.li`
-  width: 130px;
+  width: 180px;
   font-family: 'Roboto Mono';
-  text-align: right;
   cursor: pointer;
-  padding: 0;
+  padding: 10px 5px;
   font-size: 10px;
   list-style: none;
-  margin-bottom: 7px;
   color: #AAA;
-
-  &:hover {
-    color: ${props => props.darkmode ? '#DADADA' : '#000'};
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   a {
     color: #AAA;
     text-decoration: none;
-
-    &:hover {
-      color: ${props => props.darkmode ? '#DADADA' : '#000'};
-    }
   }
 `
 
@@ -73,8 +70,13 @@ class TopBar extends Component {
       <Container>
         <Dropdown >
           <Dots darkmode={darkmode} />
-          <List>
-            <Item onClick={this.props.switchUIMode} darkmode={darkmode}> { darkmode ? 'Disable' : 'Enable'} darkmode</Item>
+          <List darkmode={darkmode}>
+            <Item
+              onClick={this.props.switchUIMode}
+              darkmode={darkmode}>
+                Enable darkmode
+                <SwitchButton darkmode={darkmode} />
+            </Item>
             {
               items.map((item) => (
                 <Item key={item.text} darkmode={darkmode}>
