@@ -65,6 +65,10 @@ const items = [
     text: 'Visit Website',
     url: 'http://tabipsum.com'
   },
+  {
+    text: 'Created by @edkf',
+    url: 'https://edkf.com.br'
+  },
 ]
 
 class TopBar extends Component {

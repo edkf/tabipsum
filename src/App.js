@@ -71,6 +71,19 @@ const units = [ 'words', 'sentences', 'paragraphs']
 
 class App extends Component {
 
+  constructor (props) {
+    super(props)
+    this.switchTheme = this.switchTheme.bind(this)
+  }
+
+  componentDidMount () {
+    console.log(localStorage.getItem("darkmode"))
+  }
+  
+  switchTheme () {
+    localStorage.setItem('darkmode', !localStorage.getItem("darkmode"))
+  }
+
   render() {
 
     const { content, value, contentType, darkmode } = this.props.state
