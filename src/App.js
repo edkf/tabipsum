@@ -5,7 +5,7 @@ import InputRange from 'react-input-range'
 import { connect } from 'react-redux'
 
 // Actions
-import { changeUnit, updateValue } from './actions'
+import { changeUnit, updateValue, switchUIMode } from './actions'
 
 // Components
 import TopBar from './components/topBar'
@@ -73,12 +73,12 @@ class App extends Component {
 
   render() {
 
-    const { content, value, contentType } = this.props.state
-    const { changeUnit, updateValue, updateFromNumber } = this.props
+    const { content, value, contentType, darkmode } = this.props.state
+    const { changeUnit, updateValue, updateFromNumber, switchUIMode } = this.props
 
     return (
       <Container>
-        <TopBar />
+        <TopBar darkmode={darkmode} switchUIMode={switchUIMode} />
         <MainContainer>
           <Number
             type='number'
@@ -109,7 +109,8 @@ const mapDispatchToProps = dispatch => {
   return {
     changeUnit: (event) => { dispatch(changeUnit(event.target.innerHTML))},
     updateValue: (value) => { dispatch(updateValue(value)) },
-    updateFromNumber: (event) => { dispatch(updateValue(event.target.value === '' ? false : event.target.value)) }
+    updateFromNumber: (event) => { dispatch(updateValue(event.target.value === '' ? false : event.target.value)) },
+    switchUIMode: (darkmode) => { dispatch(switchUIMode(darkmode)) } 
   }
 }
 

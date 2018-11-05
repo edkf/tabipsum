@@ -12,6 +12,7 @@ const content = loremIpsum({
 
 export const initialState = {
   value: 14,
+  darkmode: false,
   contentType: 'words',
   content
 }

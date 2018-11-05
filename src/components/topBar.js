@@ -62,10 +62,6 @@ const Item = styled.li`
 
 const items = [
   {
-    text: 'Created by @edkf',
-    url: 'https://edkf.com.br'
-  },
-  {
     text: 'Visit Website',
     url: 'http://tabipsum.com'
   },
@@ -73,14 +69,18 @@ const items = [
 
 class TopBar extends Component {
   render () {
+
+    const { darkmode } = this.props
+
     return (
       <Container>
         <Dropdown >
           <Dots />
           <List>
+            <Item onClick={this.props.switchUIMode}> { darkmode ? 'Disable' : 'Enable'} darkmode</Item>
             {
               items.map((item) => (
-                <Item>
+                <Item key={item.text}>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">{item.text}</a>
                 </Item>
               ))
