@@ -18,6 +18,7 @@ const Container = styled.div`
   justify-content: space-between;
   width: 320px;
   height: 420px;
+  background: ${props => props.darkmode ? '#2E2F30' : '#FFFFFF'}
 `
 
 const MainContainer = styled.div`
@@ -35,6 +36,7 @@ const Number = styled.input`
   letter-spacing: -10px;
   border: none;
   background-color: transparent;
+  color: ${props => props.darkmode ? '#DADADA' : '#000000'}
 
   &:focus {
     outline: none;
@@ -90,7 +92,7 @@ class App extends Component {
     const { changeUnit, updateValue, updateFromNumber, switchUIMode } = this.props
 
     return (
-      <Container>
+      <Container darkmode={darkmode}>
         <TopBar darkmode={darkmode} switchUIMode={switchUIMode} />
         <MainContainer>
           <Number
@@ -99,10 +101,11 @@ class App extends Component {
             max='100'
             value={value}
             onChange={updateFromNumber}
+            darkmode={darkmode}
           />
           <List>
             {units.map((unit, index) => (
-              <Item key={unit} isSelected={unit === contentType ? true : false } onClick={changeUnit}>{unit}</Item>
+              <Item key={unit} darkmode={darkmode} isSelected={unit === contentType ? true : false } onClick={changeUnit}>{unit}</Item>
             ))}
           </List>
           <InputRange
@@ -110,6 +113,7 @@ class App extends Component {
             maxValue={100}
             value={value}
             onChange={updateValue}
+            darkmode={darkmode}
           />
         </MainContainer>
         <Button content={content} />
