@@ -4,7 +4,8 @@
 
 ## Get Tab Ipsum
 
-- **[Download the extension](https://chrome.google.com/webstore/detail/tabipsum/kodnpaacnfpgeakliedgocnfoeiajghp)** (Chrome only)
+- **[Mac App](https://assets.edkf.com.br/TabIpsum-1.0.0.dmg.zip)**
+- **[Chrome extension](https://chrome.google.com/webstore/detail/tabipsum/kodnpaacnfpgeakliedgocnfoeiajghp)**
 
  
 ## Contribute
